@@ -1,0 +1,7 @@
+STARTING_PLAYER = 1
+NUM_GAMES = 10
+NUM_SIMULATIONS = 1
+
+# Nim specific parameters
+NIM_N = 100
+NIM_K = 10
