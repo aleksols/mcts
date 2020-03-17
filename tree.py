@@ -1,9 +1,3 @@
-class Tree:
-    def __init__(self):
-        self.nodes = []
-        self.edges = {}
-
-
 class Node:
     def __init__(self, state, edge_action, player):
         self.wins = 0

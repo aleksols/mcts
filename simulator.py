@@ -9,6 +9,7 @@ from tree import Node
 
 from config import *
 
+
 class Simulator:
 
     def __init__(self, c, G, P, M, N, K, B, game):
@@ -21,15 +22,16 @@ class Simulator:
         self.B = B
         self.game_type = game
 
-
     def player_one_starts(self):
         if self.P == 3:
             return bool(random.randint(0, 1))
         return self.P == 1
 
     def play(self, verbose=False):
-        player_one_wins = 0
+        wins = 0
         for game in tqdm(range(1, self.G + 1)):
+            if verbose:
+                print("Game", game)
             player = self.player_one_starts()
             if self.game_type == "nim":
                 sim_manager = NimManager(player, self.N, self.K)
@@ -43,20 +45,21 @@ class Simulator:
                 root = kernel.get_best_action(self.M, root)
                 sim_manager.apply_action(root.edge_action, verbose=verbose)
             if not root.player:
-                player_one_wins += 1
-        print("Player one wins", player_one_wins, "of", game)
+                wins += 1
+        print("Player 1 wins", wins, "of", game)
 
 
 if __name__ == '__main__':
-    import config
+
     sim = Simulator(
         c=1,
-        G=5000,
+        G=100,
         P=1,
-        M=500,
-        N=10,
-        K=3,
-        B=0,
+        M=2000,
+        N=15,
+        K=8,
+        B=[0, 0, 1, 0, 2, 1],
+        # B=[1, 0, 2, 0, 0, 1],
         game="nim"
     )
     sim.play(verbose=False)

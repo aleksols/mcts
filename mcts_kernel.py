@@ -16,14 +16,11 @@ class MCTS:
         for _ in range(num_simulations):
             leaf_node = self.tree_search(root)
             z = self.rollout(leaf_node)
-            # print("z", z)
             self.backprop(leaf_node, z)
         self.state_manager.set_state(root.state, root.player)
         return self.select_node(root, c=0)
 
     def select_node(self, node: Node, c) -> Node:  # Tree policy
-        # print(node)
-        # print(node.N())
         if node.player:
             best_child = np.argmax([child.value + c * (math.log(node.N()) / child.N()) ** (1/2) for child in node.children])
         else:
@@ -47,7 +44,7 @@ class MCTS:
             _, action = random.choice(self.state_manager.generate_child_states())
             self.state_manager.apply_action(action)
         if self.state_manager.player:
-            return 0
+            return -1
         return 1
 
     def backprop(self, leaf_node: Node, z):
