@@ -4,7 +4,7 @@ import random
 import numpy as np
 
 from state_manager import StateManager
-from tree import Node
+from node import Node
 
 
 class MCTS:
@@ -25,7 +25,6 @@ class MCTS:
             best_child = np.argmax([child.value + c * (math.log(node.N()) / child.N()) ** (1/2) for child in node.children])
         else:
             best_child = np.argmin([child.value - c * (math.log(node.N()) / child.N()) ** (1/2) for child in node.children])
-
         return node.children[best_child]
 
     def tree_search(self, root: Node):
@@ -52,25 +51,3 @@ class MCTS:
             leaf_node.visits += 1
             leaf_node.wins += z
             leaf_node = leaf_node.parent
-
-
-
-if __name__ == '__main__':
-    from nim_manager import NimManager
-
-    for i in range(100):
-        manager = NimManager(True)
-        kernel = MCTS(manager)
-        game_manager = NimManager(True)
-        root = Node(manager.game_state, None, manager.player)
-
-        while root.state != 0:
-            root = kernel.get_best_action(500, root)
-            root.pretty_print_values()
-            game_manager.apply_action(root.edge_action, True)
-
-
-
-
-
-

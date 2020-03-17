@@ -7,16 +7,7 @@ class Node:
         self.children = []
         self.parent = None
         self.edge_action = edge_action  # The action applied to get to this node
-        self.expandable_children = []
         self.expanded = False
-
-    def add_children(self, child_saps):
-        for action, state in child_saps:
-            node = Node(state, action, not self.player)
-            if node in self.children:
-                continue
-            node.parent = self
-            self.children.append(node)
 
     def has_children(self):
         return len(self.children) > 0
@@ -43,7 +34,6 @@ class Node:
 
     def pretty_print_values(self):
         print(self.wins, "/", self.visits)
-
 
     def __eq__(self, other):
         return self.state == other.state and \

@@ -34,9 +34,3 @@ class NimManager(StateManager):
     @property
     def finished(self):
         return self.game_state == 0
-
-if __name__ == '__main__':
-    NIM = NimManager(0)
-    NIM.apply_action(2)
-    print("state = 10\nchildren:")
-    print(NIM.generate_child_states(10))

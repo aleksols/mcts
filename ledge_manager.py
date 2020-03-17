@@ -64,15 +64,3 @@ class LedgeManager(StateManager):
     @property
     def finished(self):
         return 2 not in self.game_state
-
-
-if __name__ == '__main__':
-    man = LedgeManager(True, [1, 0, 0, 0, 1, 2, 1])
-    for state, action in man.generate_child_states():
-        print(state, action)
-
-    man.apply_action((0, None), verbose=True)
-    man.apply_action((4, 0), verbose=True)
-    man.apply_action((0, None), verbose=True)
-    man.apply_action((5, 0), verbose=True)
-    man.apply_action((0, None), verbose=True)

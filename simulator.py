@@ -5,9 +5,7 @@ from tqdm import tqdm
 from ledge_manager import LedgeManager
 from nim_manager import NimManager
 from mcts_kernel import MCTS
-from tree import Node
-
-from config import *
+from node import Node
 
 
 class Simulator:
@@ -55,11 +53,11 @@ if __name__ == '__main__':
         c=1,
         G=100,
         P=1,
-        M=2000,
+        M=500,
         N=15,
         K=8,
-        B=[0, 0, 1, 0, 2, 1],
-        # B=[1, 0, 2, 0, 0, 1],
-        game="nim"
+        # B=[0, 0, 1, 0, 2, 1],
+        B=[1, 0, 0, 2, 0, 1],
+        game="ledge"
     )
-    sim.play(verbose=False)
+    sim.play(verbose=True)
